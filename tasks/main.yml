@@ -15,6 +15,17 @@
   until: apt_prereq_result is succeeded
   tags: nagiosgraph
 
+- name: Ensure ansible module requirements are installed
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - python-pexpect
+  register: apt_mod_result
+  until: apt_mod_result is succeeded
+  tags: nagiosgraph
+
 - name: Ensure nagiosgraph unarchive dest exists
   file:
     path: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}"
