@@ -29,7 +29,7 @@ nagiosgraph_js_url: /nagiosgraph/nagiosgraph.js
 nagiosgraph_nagcgi_url: /nagios3/cgi-bin
 nagiosgraph_perfdata_file: /tmp/perfdata.log
 nagiosgraph_nagios_user: nagios
-nagiosgraph_nagios_user: www-data
+nagiosgraph_apache_user: www-data
 nagiosgraph_mod_nag_conf: y
 nagiosgraph_nag_conf_file: /etc/nagios3/nagios.cfg
 nagiosgraph_nag_commands_file: /etc/nagios3/nagiosgraph-commands.cfg

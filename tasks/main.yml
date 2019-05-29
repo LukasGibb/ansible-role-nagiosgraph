@@ -62,12 +62,12 @@
       'URL of Nagios CGI scripts': "{{ nagiosgraph_nagcgi_url }}"
       'Path of Nagios performance data file': "{{ nagiosgraph_perfdata_file }}"
       'username or userid of Nagios user': "{{ nagiosgraph_nagios_user }}"
-      'username or userid of web server user': "{{ www-data }}"
+      'username or userid of web server user': "{{ nagiosgraph_apache_user }}"
       'Modify the Nagios configuration': "{{ nagiosgraph_mod_nag_conf }}"
       'Path of Nagios configuration file': "{{ nagiosgraph_nag_conf_file }}"
       'Path of Nagios commands file': "{{ nagiosgraph_nag_commands_file }}"
       'Modify the Apache configuration': "{{ nagiosgraph_mod_apache_conf }}"
       'Path of Apache configuration directory': "{{ nagiosgraph_apache_conf_path }}"
-  creates: '{{ nagiosgraph_nag_commands_file }}'
-  echo: yes
+    creates: '{{ nagiosgraph_nag_commands_file }}'
+    echo: yes
   tags: nagiosgraph
