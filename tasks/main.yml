@@ -24,9 +24,8 @@
 
 - name: Download and unarchive nagiosgraph install files
   unarchive:
-    # src: "{{ nagiosgraph_dl_dst }}/{{ nagiosgraph_gz }}"
     src: "{{ nagiosgraph_full_url }}"
-    dest: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}"
+    dest: "{{ nagiosgraph_dl_dst }}"
     creates: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl"
     remote_src: yes
   tags: nagiosgraph
