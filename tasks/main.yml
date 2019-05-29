@@ -76,6 +76,7 @@
       'Path of Nagios commands file': "{{ nagiosgraph_nag_commands_file }}"
       'Modify the Apache configuration': "{{ nagiosgraph_mod_apache_conf }}"
       'Path of Apache configuration directory': "{{ nagiosgraph_apache_conf_path }}"
+      'Continue with this configuration': "y"
     creates: '{{ nagiosgraph_nag_commands_file }}'
     echo: yes
   tags: nagiosgraph
