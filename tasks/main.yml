@@ -15,33 +15,6 @@
   until: apt_prereq_result is succeeded
   tags: nagiosgraph
 
-# May not need this.
-#- name: Ensure unzip package is installed
-#  apt:
-#    name: "{{ packages }}"
-#    state: present
-#  vars:
-#    packages:
-#    - unzip
-#  register: apt_unzip_result
-#  until: apt_unzip_result is succeeded
-#  tags: nagiosgraph
-
-- name: Ensure nagiosgraph download dest exists
-  file:
-    path: "{{ nagiosgraph_dl_dst }}"
-    recurse: yes
-    state: directory
-  tags: nagiosgraph
-
-# Unarchive can download and unarchive in one operation
-# Don't need to download as a separate task
-#- name: Download nagiosgraph
-#  get_url:
-#    url: "{{ nagiosgraph_full_url }}"
-#    dest: "{{ nagiosgraph_dl_dst }}/{{ nagiosgraph_gz }}"
-#  tags: nagiosgraph
-
 - name: Ensure nagiosgraph unarchive dest exists
   file:
     path: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}"
@@ -59,13 +32,13 @@
   tags: nagiosgraph
 
 - name: Check nagiosgraph pre-requisites
-  shell: "{{ nagios_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl --check-prereq"
+  shell: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl --check-prereq"
   # default behaviour of shell module should trigger failed_when if this script returns nonzero.
   tags: nagiosgraph
 
 - name: Install nagiosgraph
   expect:
-    command: "{{ nagios_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl --layout standalone --prefix=/usr/local/nagiosgraph"
+    command: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl --layout standalone --prefix=/usr/local/nagiosgraph"
     responses:
       'Destination directory': "{{ nagiosgraph_dest_dir }}"
       'Location of configuration files': "{{ nagiosgraph_conf_files }}"
