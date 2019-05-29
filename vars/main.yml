@@ -3,4 +3,4 @@
 
 nagiosgraph_gz: "nagiosgraph-{{ nagiosgraph_version }}.tar.gz"
 
-nagiosgraph_full_url: "{{ nagiosgraph_dl_url }}/{{ nagiosgraph_version }}/{{ nagiosgraph_install_file }}"
+nagiosgraph_full_url: "{{ nagiosgraph_dl_url }}/{{ nagiosgraph_version }}/{{ nagiosgraph_gz }}"
