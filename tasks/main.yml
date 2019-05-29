@@ -41,7 +41,7 @@
     responses:
       'Destination directory': "{{ nagiosgraph_dest_dir }}"
       'Location of configuration files': "{{ nagiosgraph_conf_path }}"
-      'Location of executables': "{{ nagiosgraph_exe }}"
+      'Location of executables': "{{ nagiosgraph_bin_path }}"
       'Location of CGI scripts': "{{ nagiosgraph_cgi_path }}"
       'Location of documentation': "{{ nagiosgraph_doc_path }}"
       'Location of examples': "{{ nagiosgraph_example_path }}"
