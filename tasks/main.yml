@@ -1,7 +1,7 @@
 ---
 # tasks file for ansible-role-nagiosgraph
 
-- name: Install nagiosgraph prerequisites
+- name: Ensure nagiosgraph prerequisites are installed
   apt:
     name: "{{ packages }}"
     state: present
@@ -11,8 +11,19 @@
     - librrds-perl
     - libgd-gd2-perl
     - libnagios-object-perl
-  register: my_result
-  until: my_result is succeeded
+  register: apt_prereq_result
+  until: apt_prereq_result is succeeded
+  tags: nagiosgraph
+
+- name: Ensure unzip package is installed
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - unzip
+  register: apt_unzip_result
+  until: apt_unzip_result is succeeded
   tags: nagiosgraph
 
 - name: Ensure nagiosgraph download dest exists
