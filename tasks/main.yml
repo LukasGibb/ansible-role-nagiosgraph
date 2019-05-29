@@ -40,7 +40,7 @@
     command: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl --layout standalone --prefix=/usr/local/nagiosgraph"
     responses:
       'Destination directory': "{{ nagiosgraph_dest_dir }}"
-      'Location of configuration files': "{{ nagiosgraph_conf_files }}"
+      'Location of configuration files': "{{ nagiosgraph_conf_path }}"
       'Location of executables': "{{ nagiosgraph_exe }}"
       'Location of CGI scripts': "{{ nagiosgraph_cgi_path }}"
       'Location of documentation': "{{ nagiosgraph_doc_path }}"
