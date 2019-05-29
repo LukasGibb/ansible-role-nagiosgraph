@@ -5,7 +5,7 @@ nagiosgraph_version: "1.5.2"
 
 nagiosgraph_dl_url: "https://sourceforge.net/projects/nagiosgraph/files/nagiosgraph/"
 
-nagiosgraph_dl_dst: "/tmp/nagiosgraph/"
+nagiosgraph_dl_dst: "/tmp/nagiosgraph"
 
 # Install script responses
 
