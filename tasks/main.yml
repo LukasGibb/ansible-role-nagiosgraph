@@ -48,7 +48,7 @@
 
 - name: Install nagiosgraph
   expect:
-    command: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl --layout standalone --prefix=/usr/local/nagiosgraph"
+    command: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl --layout standalone"
     responses:
       'Destination directory': "{{ nagiosgraph_dest_dir }}"
       'Location of configuration files': "{{ nagiosgraph_conf_path }}"
