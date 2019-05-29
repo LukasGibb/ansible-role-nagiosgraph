@@ -1,0 +1,6 @@
+---
+- hosts: all
+
+  roles:
+    - oefenweb.nagios-server
+    - role_under_test

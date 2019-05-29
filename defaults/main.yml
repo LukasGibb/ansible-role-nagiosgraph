@@ -1,0 +1,37 @@
+---
+# defaults file for ansible-role-nagiosgraph
+
+nagiosgraph_version: "1.5.2"
+
+nagiosgraph_dl_url: "https://sourceforge.net/projects/nagiosgraph/files/nagiosgraph/"
+
+nagiosgraph_dl_dst: "/tmp/nagiosgraph/"
+
+# Install script responses
+
+nagiosgraph_dest_dir: /usr/local/nagiosgraph
+nagiosgraph_conf_path: /usr/local/nagiosgraph/etc
+nagiosgraph_bin_path: /usr/local/nagiosgraph/bin
+nagiosgraph_cgi_path: /usr/local/nagiosgraph/cgi
+nagiosgraph_doc_path: /usr/local/nagiosgraph/doc
+nagiosgraph_example_path: /usr/local/nagiosgraph/examples
+nagiosgraph_share_path: /usr/local/nagiosgraph/share
+nagiosgraph_util_path: /usr/local/nagiosgraph/util
+nagiosgraph_var_path: /usr/local/nagiosgraph/var
+nagiosgraph_rrd_path: /usr/local/nagiosgraph/var/rrd
+nagiosgraph_log_path: /usr/local/nagiosgraph/var/log
+nagiosgraph_log_file: /usr/local/nagiosgraph/var/log/nagiosgraph.log
+nagiosgraph_cgi_log_file: /usr/local/nagiosgraph/var/log/nagiosgraph-cgi.log
+nagiosgraph_base_url: /nagiosgraph
+nagiosgraph_cgi_url: /nagiosgraph/cgi-bin
+nagiosgraph_css_url: /nagiosgraph/nagiosgraph.css
+nagiosgraph_js_url: /nagiosgraph/nagiosgraph.js
+nagiosgraph_nagcgi_url: /nagios3/cgi-bin
+nagiosgraph_perfdata_file: /tmp/perfdata.log
+nagiosgraph_nagios_user: nagios
+nagiosgraph_nagios_user: www-data
+nagiosgraph_mod_nag_conf: y
+nagiosgraph_nag_conf_file: /etc/nagios3/nagios.cfg
+nagiosgraph_nag_commands_file: /etc/nagios3/nagiosgraph-commands.cfg
+nagiosgraph_mod_apache_conf: y
+nagiosgraph_apache_conf_path: /etc/apache2/sites-enabled

@@ -1,0 +1,73 @@
+---
+# tasks file for ansible-role-nagiosgraph
+
+- name: Install nagiosgraph prerequisites
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - libcgi-pm-perl
+    - librrds-perl
+    - libgd-gd2-perl
+    - libnagios-object-perl
+  register: my_result
+  until: my_result is succeeded
+  tags: nagiosgraph
+
+- name: Ensure nagiosgraph download dest exists
+  file:
+    path: "{{ nagiosgraph_dl_dst }}"
+    recurse: yes
+    state: directory
+  tags: nagiosgraph
+
+- name: Download nagiosgraph
+  get_url:
+    url: "{{ nagiosgraph_dl_url }}"
+    dest: "{{ nagiosgraph_dl_dst }}/{{ nagiosgraph_gz }}"
+  tags: nagiosgraph
+
+- name: Unarchive nagiosgraph install files
+  unarchive:
+    src: "{{ nagiosgraph_dl_dst }}/{{ nagiosgraph_gz }}"
+    dest: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/"
+  tags: nagiosgraph
+
+- name: Check nagiosgraph pre-requisites
+  shell: "{{ nagios_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl --check-prereq"
+  # default behaviour of shell module should trigger failed_when if this script returns nonzero.
+
+- name: Install nagiosgraph
+  expect:
+    command: "{{ nagios_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl --layout standalone --prefix=/usr/local/nagiosgraph"
+    responses:
+      'Destination directory': "{{ nagiosgraph_dest_dir }}"
+      'Location of configuration files': "{{ nagiosgraph_conf_files }}"
+      'Location of executables': "{{ nagiosgraph_exe }}"
+      'Location of CGI scripts': "{{ nagiosgraph_cgi_path }}"
+      'Location of documentation': "{{ nagiosgraph_doc_path }}"
+      'Location of examples': "{{ nagiosgraph_example_path }}"
+      'Location of CSS and JavaScript files': "{{ nagiosgraph_share_path }}"
+      'Location of utilities': "{{ nagiosgraph_util_path }}"
+      'Location of state files': "{{ nagiosgraph_var_path }}"
+      'Location of RRD files': "{{ nagiosgraph_rrd_path }}"
+      'Location of log files': "{{ nagiosgraph_log_path }}"
+      'Path of log file': "{{ nagiosgraph_log_file }}"
+      'Path of CGI log file': "{{ nagiosgraph_cgi_log_file }}"
+      'Base URL': "{{ nagiosgraph_base_url }}"
+      'URL of CGI scripts': "{{ nagiosgraph_cgi_url }}"
+      'URL of CSS file': "{{ nagiosgraph_css_url }}"
+      'URL of JavaScript file': "{{ nagiosgraph_js_url }}"
+      'URL of Nagios CGI scripts': "{{ nagiosgraph_nagcgi_url }}"
+      'Path of Nagios performance data file': "{{ nagiosgraph_perfdata_file }}"
+      'username or userid of Nagios user': "{{ nagiosgraph_nagios_user }}"
+      'username or userid of web server user': "{{ www-data }}"
+      'Modify the Nagios configuration': "{{ nagiosgraph_mod_nag_conf }}"
+      'Path of Nagios configuration file': "{{ nagiosgraph_nag_conf_file }}"
+      'Path of Nagios commands file': "{{ nagiosgraph_nag_commands_file }}"
+      'Modify the Apache configuration': "{{ nagiosgraph_mod_apache_conf }}"
+      'Path of Apache configuration directory': "{{ nagiosgraph_apache_conf_path }}"
+  creates: '{{ nagiosgraph_nag_commands_file }}'
+  echo: yes
+  tags: nagiosgraph
