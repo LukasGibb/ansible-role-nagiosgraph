@@ -15,16 +15,17 @@
   until: apt_prereq_result is succeeded
   tags: nagiosgraph
 
-- name: Ensure unzip package is installed
-  apt:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-    - unzip
-  register: apt_unzip_result
-  until: apt_unzip_result is succeeded
-  tags: nagiosgraph
+# May not need this.
+#- name: Ensure unzip package is installed
+#  apt:
+#    name: "{{ packages }}"
+#    state: present
+#  vars:
+#    packages:
+#    - unzip
+#  register: apt_unzip_result
+#  until: apt_unzip_result is succeeded
+#  tags: nagiosgraph
 
 - name: Ensure nagiosgraph download dest exists
   file:
@@ -33,23 +34,26 @@
     state: directory
   tags: nagiosgraph
 
-- name: Download nagiosgraph
-  get_url:
-    url: "{{ nagiosgraph_dl_url }}"
-    dest: "{{ nagiosgraph_dl_dst }}/{{ nagiosgraph_gz }}"
-  tags: nagiosgraph
+# Unarchive can download and unarchive in one operation
+# Don't need to download as a separate task
+#- name: Download nagiosgraph
+#  get_url:
+#    url: "{{ nagiosgraph_dl_url }}"
+#    dest: "{{ nagiosgraph_dl_dst }}/{{ nagiosgraph_gz }}"
+#  tags: nagiosgraph
 
 - name: Ensure nagiosgraph unarchive dest exists
   file:
-    path: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/"
+    path: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}"
     recurse: yes
     state: directory
   tags: nagiosgraph
 
-- name: Unarchive nagiosgraph install files
+- name: Download and unarchive nagiosgraph install files
   unarchive:
-    src: "{{ nagiosgraph_dl_dst }}/{{ nagiosgraph_gz }}"
-    dest: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/"
+    # src: "{{ nagiosgraph_dl_dst }}/{{ nagiosgraph_gz }}"
+    src: "{{ nagiosgraph_dl_url }}"
+    dest: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}"
     creates: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl"
     remote_src: yes
   tags: nagiosgraph
