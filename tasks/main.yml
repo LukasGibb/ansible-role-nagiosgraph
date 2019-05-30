@@ -50,7 +50,7 @@
   tags: nagiosgraph
 
 - name: Check nagiosgraph pre-requisites
-  shell: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl --check-prereq"
+  command: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl --check-prereq"
   # default behaviour of shell module should trigger failed_when if this script returns nonzero.
   args:
     creates: "{{ nagiosgraph_cgi_log_file }}"
