@@ -41,14 +41,26 @@
     remote_src: yes
   tags: nagiosgraph
 
+- name: Ensure the nagiosgraph commands file exists
+  file:
+    path: "{{ nagiosgraph_nag_commands_file }}"
+    state: touch
+    modification_time: preserve
+    access_time: preserve
+  tags: nagiosgraph
+
 - name: Check nagiosgraph pre-requisites
   shell: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl --check-prereq"
   # default behaviour of shell module should trigger failed_when if this script returns nonzero.
+  args:
+    creates: "{{ nagiosgraph_cgi_log_file }}"
+    # this file is technically created by the 'install' task.
   tags: nagiosgraph
 
 - name: Install nagiosgraph
   expect:
-    command: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}/install.pl --layout standalone"
+    chdir: "{{ nagiosgraph_dl_dst }}/nagiosgraph-{{ nagiosgraph_version }}"
+    command: "./install.pl --layout standalone"
     responses:
       'Destination directory': "{{ nagiosgraph_dest_dir }}"
       'Location of configuration files': "{{ nagiosgraph_conf_path }}"
@@ -77,6 +89,6 @@
       'Modify the Apache configuration': "{{ nagiosgraph_mod_apache_conf }}"
       'Path of Apache configuration directory': "{{ nagiosgraph_apache_conf_path }}"
       'Continue with this configuration': "y"
-    creates: '{{ nagiosgraph_nag_commands_file }}'
+    creates: "{{ nagiosgraph_cgi_log_file }}"
     echo: yes
   tags: nagiosgraph
