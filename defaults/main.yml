@@ -22,6 +22,9 @@ nagiosgraph_apache_auth: True
 # The file that contains our basic auth usernames/passwords
 nagiosgraph_htpasswd_file: /etc/nagios3/htpasswd.users
 
+# The path to Nagios' Server Side Includes folder (so we can get mouseovers working)
+nagiosgraph_nag_ssi_path: /usr/share/nagios3/htdocs/ssi
+
 # Install script responses
 
 nagiosgraph_dest_dir: /usr/local/nagiosgraph

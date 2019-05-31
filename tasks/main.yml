@@ -103,3 +103,14 @@
     mode: 0644
   notify: apache reload
   tags: nagiosgraph
+
+- name: Enable graphs on action_url mouseover
+  template:
+    src: share/nagiosgraph.ssi
+    dest: "{{ nagiosgraph_nag_ssi_path }}/common-header.ssi"
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  notify: apache reload
+  tags: nagiosgraph

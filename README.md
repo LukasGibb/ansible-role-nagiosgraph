@@ -8,6 +8,15 @@ Requirements
 
 Requires a working nagios installation.
 
+See the nagiosgraph documentation for info on how to add nagiosgraph in your service templates etc.
+
+Basically if you want a link to nagiosgraph to show for each service on the CGI GUI and also have a graph show 
+up when you hover over the icon you need to add something like this in your generic template/s:
+
+    action_url /nagiosgraph/cgi-bin/show.cgi?host=$HOSTNAME$&service=$SERVICEDESC$' onMouseOver='showGraphPopup(this)' onMouseOut='hideGraphPopup()' rel='/nagiosgraph/cgi-bin/showgraph.cgi?host=$HOSTNAME$&service=$SERVICEDESC$
+
+That should really be all you need to do to your nagios config to get this role working.
+
 Role Variables
 --------------
 
