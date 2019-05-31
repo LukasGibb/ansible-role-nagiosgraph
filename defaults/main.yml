@@ -1,11 +1,26 @@
 ---
 # defaults file for ansible-role-nagiosgraph
 
+# The version of Nagiosgraph to download/install
 nagiosgraph_version: "1.5.2"
 
+# The base location of the download files (will have version added to path and filename)
 nagiosgraph_dl_url: "https://sourceforge.net/projects/nagiosgraph/files/nagiosgraph/"
 
+# The directory we will extract the .tar.gz into
 nagiosgraph_dl_dst: "/tmp/nagiosgraph"
+
+# The name of the nagios service that is installed
+nagiosgraph_nag_service: "nagios3"
+
+# The name of the apache service that is installed
+nagiosgraph_apache_service: "apache2"
+
+# Whether we want to enable basic auth for the nagiosgraph URL
+nagiosgraph_apache_auth: True
+
+# The file that contains our basic auth usernames/passwords
+nagiosgraph_htpasswd_file: /etc/nagios3/htpasswd.users
 
 # Install script responses
 
@@ -32,6 +47,6 @@ nagiosgraph_nagios_user: nagios
 nagiosgraph_apache_user: www-data
 nagiosgraph_mod_nag_conf: y
 nagiosgraph_nag_conf_file: /etc/nagios3/nagios.cfg
-nagiosgraph_nag_commands_file: /etc/nagios3/nagiosgraph-commands.cfg
+nagiosgraph_nag_commands_file: /etc/nagios3/conf.d/nagiosgraph-commands.cfg
 nagiosgraph_mod_apache_conf: y
 nagiosgraph_apache_conf_path: /etc/apache2/sites-enabled

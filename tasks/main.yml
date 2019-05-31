@@ -91,4 +91,15 @@
       'Continue with this configuration': "y"
     creates: "{{ nagiosgraph_cgi_log_file }}"
     echo: yes
+  notify: nagios reload
+  tags: nagiosgraph
+
+- name: Update apache config
+  template:
+    src: etc/apache2/sites-enabled/nagiosgraph.conf
+    dest: /etc/apache2/sites-enabled/nagiosgraph.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: apache reload
   tags: nagiosgraph
